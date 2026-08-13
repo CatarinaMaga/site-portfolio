@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: "Soluções digitais claras, úteis e feitas para pessoas.",
       images: ["/og.png"],
     },
-    icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+    icons: { icon: "/logo-catarina.png", shortcut: "/logo-catarina.png" },
   };
 }
 

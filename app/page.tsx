@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Catarina Magalhães — Analista e Desenvolvedora de Sistemas",
@@ -113,7 +114,13 @@ export default function Home() {
 
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Página inicial">
-          <span className="brand-mark" aria-hidden="true">CM</span>
+          <Image
+            className="brand-logo"
+            src="/logo-catarina.png"
+            alt=""
+            width="64"
+            height="64"
+          />
           <span className="brand-text">
             <strong>Catarina Magalhães</strong>
             <small>Analista &amp; Desenvolvedora</small>
@@ -301,7 +308,9 @@ export default function Home() {
 
       <footer className="site-footer">
         <div>
-          <a className="footer-brand" href="#inicio" aria-label="Voltar ao início">CM</a>
+          <a className="footer-brand" href="#inicio" aria-label="Voltar ao início">
+            <Image src="/logo-catarina.png" alt="" width="72" height="72" />
+          </a>
           <p><strong>Catarina Magalhães</strong><br />Soluções digitais pensadas para pessoas e negócios.</p>
         </div>
         <nav aria-label="Links do rodapé">
