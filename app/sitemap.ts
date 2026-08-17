@@ -2,14 +2,12 @@ import type { MetadataRoute } from "next";
 import { headers } from "next/headers";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const requestHeaders = await headers();
-  const host = requestHeaders.get("x-forwarded-host") ?? requestHeaders.get("host") ?? "localhost:3000";
-  const protocol = requestHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  await headers();
 
   return [
     {
-      url: `${protocol}://${host}`,
-      lastModified: new Date(),
+      url: "https://catarina-magalhaes-portfolio.vercel.app/",
+      lastModified: new Date("2026-08-17"),
       changeFrequency: "monthly",
       priority: 1,
     },

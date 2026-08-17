@@ -1,40 +1,39 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Catarina Magalhães — Analista e Desenvolvedora de Sistemas",
+  title: "Desenvolvedora e Analista de Sistemas | Catarina Magalhães",
   description:
-    "Análise, desenvolvimento e melhoria de sistemas com linguagem clara, foco no seu negócio e tecnologia que facilita o dia a dia.",
-  alternates: { canonical: "/" },
+    "Catarina Magalhães é desenvolvedora, programadora e analista de sistemas. Criação de sistemas, sites, UI/UX, integrações e automações.",
+  alternates: { canonical: "https://catarina-magalhaes-portfolio.vercel.app/" },
 };
 
 const services = [
   {
     number: "01",
-    title: "Sistemas sob medida",
+    title: "Desenvolvimento de sistemas sob medida",
     description:
-      "Transformo processos manuais e ideias em soluções digitais simples, seguras e adequadas à rotina do seu negócio.",
+      "Como desenvolvedora de sistemas, transformo processos manuais e ideias em soluções digitais simples, seguras e adequadas à rotina do seu negócio.",
     deliverable: "Mais agilidade e menos retrabalho",
   },
   {
     number: "02",
-    title: "Análise e melhoria",
+    title: "Análise de sistemas e melhorias",
     description:
-      "Entendo o que acontece hoje, encontro gargalos e desenho um caminho mais eficiente antes de qualquer desenvolvimento.",
+      "Atuo como analista de sistemas para entender o cenário atual, encontrar gargalos e desenhar um caminho mais eficiente antes do desenvolvimento.",
     deliverable: "Decisões mais claras e processos melhores",
   },
   {
     number: "03",
-    title: "Sites e experiências digitais",
+    title: "Desenvolvimento de sites e UI/UX",
     description:
-      "Crio interfaces intuitivas, responsivas e acessíveis para que seus clientes encontrem o que precisam sem dificuldade.",
+      "Programo sites e interfaces intuitivas, responsivas, acessíveis e otimizadas para que clientes e buscadores encontrem o que precisam.",
     deliverable: "Uma presença digital que gera confiança",
   },
   {
     number: "04",
-    title: "Integrações e automações",
+    title: "Integrações e automações de sistemas",
     description:
-      "Conecto ferramentas e automatizo tarefas repetitivas para reduzir erros e liberar tempo para o que realmente importa.",
+      "Conecto sistemas e automatizo tarefas repetitivas para reduzir erros, organizar informações e liberar tempo para o que realmente importa.",
     deliverable: "Informações conectadas e rotina mais leve",
   },
 ];
@@ -53,7 +52,7 @@ const process = [
   {
     step: "03",
     title: "Construo e valido",
-    text: "Desenvolvo em etapas, apresento a evolução e ajustamos juntas para evitar surpresas no final.",
+    text: "Desenvolvo em etapas, compartilho a evolução e alinhamos cada decisão ao longo do processo.",
   },
   {
     step: "04",
@@ -82,23 +81,61 @@ const faqs = [
 
 export default function Home() {
   const currentYear = new Date().getFullYear();
+  const siteUrl = "https://catarina-magalhaes-portfolio.vercel.app/";
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Catarina Magalhães",
-    jobTitle: "Analista e Desenvolvedora de Sistemas",
-    email: "mailto:djktita@gmail.com",
-    telephone: "+55 71 99921-6734",
-    sameAs: [
-      "https://github.com/CatarinaMaga",
-      "https://www.linkedin.com/in/catarina-magalhães-68644866",
-    ],
-    knowsAbout: [
-      "Análise de sistemas",
-      "Desenvolvimento de sistemas",
-      "UI/UX",
-      "Automação de processos",
-      "Desenvolvimento web",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${siteUrl}#catarina`,
+        name: "Catarina Magalhães",
+        jobTitle: ["Desenvolvedora de Sistemas", "Analista de Sistemas", "Programadora"],
+        url: siteUrl,
+        image: `${siteUrl}logo-catarina.png`,
+        description:
+          "Dev, programadora, analista e desenvolvedora de sistemas especializada em soluções digitais, desenvolvimento web, UI/UX, integrações e automações.",
+        email: "mailto:djktita@gmail.com",
+        telephone: "+55 71 99921-6734",
+        sameAs: [
+          "https://github.com/CatarinaMaga",
+          "https://www.linkedin.com/in/catarina-magalhães-68644866",
+        ],
+        knowsAbout: [
+          "Análise de sistemas",
+          "Desenvolvimento de sistemas",
+          "UI/UX",
+          "Automação de processos",
+          "Desenvolvimento web",
+          "Programação",
+          "Integração de sistemas",
+        ],
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}#website`,
+        name: "Catarina Magalhães — Desenvolvimento de Sistemas",
+        url: siteUrl,
+        inLanguage: "pt-BR",
+        publisher: { "@id": `${siteUrl}#catarina` },
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${siteUrl}#servicos`,
+        name: "Catarina Magalhães — Analista e Desenvolvedora de Sistemas",
+        url: siteUrl,
+        image: `${siteUrl}logo-catarina.png`,
+        founder: { "@id": `${siteUrl}#catarina` },
+        areaServed: { "@type": "Country", name: "Brasil" },
+        serviceType: services.map((service) => service.title),
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      },
     ],
   };
 
@@ -114,12 +151,15 @@ export default function Home() {
 
       <header className="site-header">
         <a className="brand" href="#inicio" aria-label="Página inicial">
-          <Image
+          {/* O carregamento nativo evita a incompatibilidade do next/image com o vinext. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             className="brand-logo"
             src="/logo-catarina.png"
             alt=""
             width="64"
             height="64"
+            decoding="async"
           />
           <span className="brand-text">
             <strong>Catarina Magalhães</strong>
@@ -141,14 +181,15 @@ export default function Home() {
       <main id="conteudo">
         <section className="hero" id="inicio" aria-labelledby="hero-title">
           <div className="hero-content">
-            <p className="eyebrow"><span /> Catarina Magalhães · Tecnologia simples. Resultado real.</p>
+            <p className="eyebrow"><span /> Dev · Programadora · Analista de Sistemas</p>
             <h1 id="hero-title">
-              Transformo desafios do seu negócio em <em>soluções digitais.</em>
+              Desenvolvimento de sistemas para transformar desafios em <em>soluções digitais.</em>
             </h1>
             <p className="hero-lead">
-              Analiso, planejo e desenvolvo sistemas que organizam processos,
-              economizam tempo e tornam o trabalho mais simples — sempre com uma
-              conversa clara, mesmo para quem não é da área de tecnologia.
+              Sou Catarina Magalhães, desenvolvedora e analista de sistemas. Analiso,
+              planejo e programo sistemas, sites e automações que organizam processos,
+              economizam tempo e tornam o trabalho mais simples — com uma conversa
+              clara, mesmo para quem não é da área de tecnologia.
             </p>
             <div className="hero-actions">
               <a className="button button-primary" href="#contato">
@@ -187,11 +228,11 @@ export default function Home() {
           <header className="section-heading">
             <div>
               <p className="section-label">Como posso ajudar</p>
-              <h2 id="services-title">Tecnologia aplicada ao que você precisa resolver.</h2>
+              <h2 id="services-title">Desenvolvimento de sistemas, sites e automações.</h2>
             </div>
             <p>
-              Cada projeto começa entendendo o problema. A ferramenta vem depois,
-              escolhida para simplificar — e não complicar — seu dia a dia.
+              Cada projeto começa com uma análise do problema. A tecnologia e a programação
+              vêm depois, escolhidas para simplificar — e não complicar — seu dia a dia.
             </p>
           </header>
 
@@ -249,9 +290,10 @@ export default function Home() {
             <p className="section-label">Quem está por trás</p>
             <h2 id="about-title">Analista para compreender. Desenvolvedora para realizar.</h2>
             <p>
-              Sou Catarina Magalhães, Analista e Desenvolvedora de Sistemas. Uno visão de negócio,
-              organização e conhecimento técnico para transformar necessidades em
-              produtos digitais úteis e fáceis de usar.
+              Sou Catarina Magalhães, profissional de tecnologia que atua como dev,
+              programadora, analista e desenvolvedora de sistemas. Uno visão de negócio,
+              organização, UI/UX e conhecimento técnico para transformar necessidades
+              em produtos digitais úteis e fáceis de usar.
             </p>
             <p>
               Acredito que um bom sistema não é o que usa mais tecnologia, mas o que
@@ -309,9 +351,11 @@ export default function Home() {
       <footer className="site-footer">
         <div>
           <a className="footer-brand" href="#inicio" aria-label="Voltar ao início">
-            <Image src="/logo-catarina.png" alt="" width="72" height="72" />
+            {/* O carregamento nativo evita a incompatibilidade do next/image com o vinext. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-catarina.png" alt="" width="72" height="72" decoding="async" />
           </a>
-          <p><strong>Catarina Magalhães</strong><br />Soluções digitais pensadas para pessoas e negócios.</p>
+          <p><strong>Catarina Magalhães</strong><br />Dev, programadora, analista e desenvolvedora de sistemas.</p>
         </div>
         <nav aria-label="Links do rodapé">
           <a href="https://github.com/CatarinaMaga" target="_blank" rel="noreferrer">GitHub</a>

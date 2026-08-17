@@ -1,6 +1,7 @@
 {
-  "name": "site-creator-vinext-starter",
+  "name": "catarina-magalhaes-portfolio",
   "version": "0.1.0",
+  "description": "Portfólio profissional de Catarina Magalhães, analista e desenvolvedora de sistemas.",
   "private": true,
   "engines": {
     "node": ">=22.13.0"

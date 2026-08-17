@@ -10,35 +10,27 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(`${protocol}://${host}`),
     title: {
-      default: "Catarina Magalhães | Analista e Desenvolvedora de Sistemas",
+      default: "Desenvolvedora e Analista de Sistemas | Catarina Magalhães",
       template: "%s",
     },
     description:
-      "Sistemas, sites, automações e melhorias digitais para simplificar processos e fazer seu negócio avançar.",
-    keywords: [
-      "desenvolvimento de sistemas",
-      "analista de sistemas",
-      "desenvolvedora de sistemas",
-      "automação de processos",
-      "sites profissionais",
-      "soluções digitais",
-    ],
+      "Catarina Magalhães é desenvolvedora, programadora e analista de sistemas. Desenvolvimento de sistemas, sites, UI/UX, integrações e automações para negócios.",
     authors: [{ name: "Catarina Magalhães", url: "https://github.com/CatarinaMaga" }],
     creator: "Catarina Magalhães",
     robots: { index: true, follow: true },
     openGraph: {
       type: "website",
       locale: "pt_BR",
-      title: "Catarina Magalhães | Analista e Desenvolvedora de Sistemas",
+      title: "Desenvolvedora e Analista de Sistemas | Catarina Magalhães",
       description:
-        "Tecnologia explicada de forma simples e transformada em soluções que facilitam o seu negócio.",
+        "Desenvolvimento de sistemas, sites, UI/UX, integrações e automações com comunicação simples e foco no seu negócio.",
       siteName: "Catarina Magalhães · Soluções Digitais",
       images: [{ url: "/og.png", width: 1728, height: 907, alt: "Catarina Magalhães — Analista e Desenvolvedora de Sistemas" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Catarina Magalhães | Analista e Desenvolvedora de Sistemas",
-      description: "Soluções digitais claras, úteis e feitas para pessoas.",
+      title: "Desenvolvedora e Analista de Sistemas | Catarina Magalhães",
+      description: "Sistemas, sites e automações pensados para pessoas e negócios.",
       images: ["/og.png"],
     },
     icons: { icon: "/logo-catarina.png", shortcut: "/logo-catarina.png" },
