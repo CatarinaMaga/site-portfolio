@@ -45,6 +45,8 @@ test("renderiza o portfólio profissional com conteúdo e contatos", async () =>
   assert.match(html, /https:\/\/catarinamaga\.github\.io\/schneider-mvp\//i);
   assert.match(html, /Abrir catálogo/i);
   assert.match(html, /https:\/\/syntecvet-catalogo\.pages\.dev\/catalogo\//i);
+  assert.match(html, /Aplicação disponível para execução local/i);
+  assert.match(html, /Aplicativo desktop em desenvolvimento/i);
   assert.match(html, /Construo e valido/i);
   assert.match(html, /compartilho a evolução e alinhamos cada decisão/i);
   assert.match(html, /https:\/\/github\.com\/CatarinaMaga/i);
@@ -73,6 +75,7 @@ test("mantém estrutura semântica, SEO e arquivos públicos essenciais", async 
   assert.match(page, /<section className="section projects"/);
   assert.match(page, /<article className="project-card"/);
   assert.match(page, /<footer className="project-actions">/);
+  assert.match(page, /project-access-status/);
   assert.match(page, /"@type": "SoftwareSourceCode"/);
   assert.match(page, /<footer className="site-footer">/);
   assert.match(layout, /openGraph:/);
@@ -93,6 +96,9 @@ test("mantém a versão estática da Vercel alinhada com os projetos", async () 
   assert.match(html, /Rastreador de Pets/i);
   assert.match(html, /href="https:\/\/catarinamaga\.github\.io\/schneider-mvp\/"/i);
   assert.match(html, /href="https:\/\/syntecvet-catalogo\.pages\.dev\/catalogo\/"/i);
+  assert.match(html, /<footer class="site-footer">/i);
+  assert.match(html, /\.site-footer\s*\{/i);
+  assert.doesNotMatch(html, /(^|\s)footer\s*\{/m);
   assert.doesNotMatch(html, /https:\/\/djktita\.github\.io\/schneider-mvp\//i);
   assert.doesNotMatch(html, /href="https:\/\/github\.com\/CatarinaMaga\/rastreador-servidor"/i);
 

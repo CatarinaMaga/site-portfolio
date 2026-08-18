@@ -74,6 +74,7 @@ const projects = [
     repositoryLabel: "Ver código",
     liveHref: "https://catarinamaga.github.io/schneider-mvp/",
     liveLabel: "Abrir demonstração",
+    accessStatus: null,
   },
   {
     number: "02",
@@ -87,6 +88,7 @@ const projects = [
     repositoryLabel: "Ver código e instruções",
     liveHref: null,
     liveLabel: null,
+    accessStatus: "Aplicação disponível para execução local",
   },
   {
     number: "03",
@@ -100,6 +102,7 @@ const projects = [
     repositoryLabel: "Ver código e instruções",
     liveHref: null,
     liveLabel: null,
+    accessStatus: "Aplicação disponível para execução local",
   },
   {
     number: "04",
@@ -113,6 +116,7 @@ const projects = [
     repositoryLabel: "Ver código e instalação",
     liveHref: null,
     liveLabel: null,
+    accessStatus: "Aplicativo desktop em desenvolvimento",
   },
   {
     number: "05",
@@ -126,6 +130,7 @@ const projects = [
     repositoryLabel: "Ver código",
     liveHref: "https://syntecvet-catalogo.pages.dev/catalogo/",
     liveLabel: "Abrir catálogo",
+    accessStatus: null,
   },
   {
     number: "06",
@@ -139,6 +144,7 @@ const projects = [
     repositoryLabel: null,
     liveHref: null,
     liveLabel: null,
+    accessStatus: "Aplicativo ainda sem acesso público",
   },
 ];
 
@@ -402,6 +408,11 @@ export default function Home() {
                     >
                       {project.liveLabel} <span aria-hidden="true">↗</span>
                     </a>
+                  )}
+                  {!project.liveHref && project.accessStatus && (
+                    <p className="project-access-status">
+                      <span aria-hidden="true">●</span> {project.accessStatus}
+                    </p>
                   )}
                   {project.repositoryHref && project.repositoryLabel ? (
                     <a
