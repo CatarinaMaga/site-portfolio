@@ -33,6 +33,14 @@ test("renderiza o portfólio profissional com conteúdo e contatos", async () =>
   assert.match(html, /<title>Desenvolvedora e Analista de Sistemas \| Catarina Magalhães<\/title>/i);
   assert.match(html, /Desenvolvimento de sistemas para transformar desafios/i);
   assert.match(html, /Como posso ajudar/i);
+  assert.match(html, /Projetos selecionados/i);
+  assert.match(html, /EcoScanner MVP/i);
+  assert.match(html, /Cadastro de Produtos/i);
+  assert.match(html, /Gerenciador de Biblioteca/i);
+  assert.match(html, /DJ Flow/i);
+  assert.match(html, /Syntec Vet/i);
+  assert.match(html, /Rastreador de Pets/i);
+  assert.match(html, /Projeto privado/i);
   assert.match(html, /Construo e valido/i);
   assert.match(html, /compartilho a evolução e alinhamos cada decisão/i);
   assert.match(html, /https:\/\/github\.com\/CatarinaMaga/i);
@@ -58,6 +66,9 @@ test("mantém estrutura semântica, SEO e arquivos públicos essenciais", async 
   assert.match(page, /<main id="conteudo">/);
   assert.match(page, /<section className="section services"/);
   assert.match(page, /<article className="service-card"/);
+  assert.match(page, /<section className="section projects"/);
+  assert.match(page, /<article className="project-card"/);
+  assert.match(page, /"@type": "SoftwareSourceCode"/);
   assert.match(page, /<footer className="site-footer">/);
   assert.match(layout, /openGraph:/);
   assert.match(layout, /twitter:/);
@@ -65,4 +76,19 @@ test("mantém estrutura semântica, SEO e arquivos públicos essenciais", async 
   assert.match(robots, /allow: "\/"/);
   assert.match(robots, /sitemap\.xml/);
   assert.match(sitemap, /2026-08-17/);
+});
+
+test("mantém a versão estática da Vercel alinhada com os projetos", async () => {
+  const html = await readFile(new URL("../vercel/index.html", import.meta.url), "utf8");
+
+  assert.match(html, /<section class="section projects" id="projetos"/i);
+  assert.match(html, /EcoScanner MVP/i);
+  assert.match(html, /DJ Flow/i);
+  assert.match(html, /Syntec Vet/i);
+  assert.match(html, /Rastreador de Pets/i);
+  assert.doesNotMatch(html, /href="https:\/\/github\.com\/CatarinaMaga\/rastreador-servidor"/i);
+
+  const jsonLd = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/i);
+  assert.ok(jsonLd, "A versão estática deve conter dados estruturados");
+  assert.doesNotThrow(() => JSON.parse(jsonLd[1]));
 });
