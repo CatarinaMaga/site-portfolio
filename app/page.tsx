@@ -61,6 +61,69 @@ const process = [
   },
 ];
 
+const projects = [
+  {
+    number: "01",
+    category: "Diagnóstico industrial",
+    title: "EcoScanner MVP",
+    description:
+      "Protótipo criado para transformar dados técnicos de motores em um diagnóstico visual de eficiência, desperdício e possibilidades de modernização.",
+    result: "Tecnologia e sustentabilidade traduzidas em decisões mais claras",
+    technologies: ["HTML5", "CSS3", "JavaScript"],
+    href: "https://github.com/CatarinaMaga/schneider-mvp",
+  },
+  {
+    number: "02",
+    category: "Sistema de gestão",
+    title: "Cadastro de Produtos",
+    description:
+      "Aplicação web para cadastrar produtos e suas embalagens, com validações, banco de dados e uma estrutura organizada para facilitar a manutenção.",
+    result: "Informações centralizadas e operações do dia a dia mais seguras",
+    technologies: ["ASP.NET Core", "Entity Framework", "SQLite"],
+    href: "https://github.com/CatarinaMaga/CadastroProdutos",
+  },
+  {
+    number: "03",
+    category: "Aplicação full stack",
+    title: "Gerenciador de Biblioteca",
+    description:
+      "Sistema para organizar um acervo de livros, permitindo cadastrar, consultar, editar e excluir informações por meio de uma interface simples.",
+    result: "Um processo manual transformado em uma experiência digital completa",
+    technologies: ["Node.js", "Express", "MySQL"],
+    href: "https://github.com/CatarinaMaga/meu-primeiro-crud-biblioteca",
+  },
+  {
+    number: "04",
+    category: "Aplicação desktop",
+    title: "DJ Flow",
+    description:
+      "Ferramenta de produtividade para DJs que reúne o download e a organização de músicas em uma interface compacta, pensada para trabalhar junto ao Rekordbox.",
+    result: "Um fluxo mais rápido para pesquisar, baixar e organizar novas faixas",
+    technologies: ["Electron", "Node.js", "Express"],
+    href: "https://github.com/CatarinaMaga/dj-flow-desktop",
+  },
+  {
+    number: "05",
+    category: "Catálogo inteligente",
+    title: "Syntec Vet",
+    description:
+      "Catálogo digital de produtos veterinários com filtros, carrinho, acesso de usuários, painel administrativo e um assistente conectado ao banco de produtos.",
+    result: "Produtos, atendimento e gestão reunidos em uma única experiência",
+    technologies: ["Next.js", "Supabase", "IA"],
+    href: "https://github.com/CatarinaMaga/Syntec-Vet-Eder",
+  },
+  {
+    number: "06",
+    category: "Mobile, API e hardware",
+    title: "Rastreador de Pets",
+    description:
+      "Ecossistema para acompanhar a localização de pets em tempo real, consultar o histórico de trajetos e integrar aplicativo móvel, servidor e coleira com GPS.",
+    result: "Software e hardware conectados para dar mais segurança aos tutores",
+    technologies: ["React Native", "Node.js", "ESP32"],
+    href: null,
+  },
+];
+
 const faqs = [
   {
     question: "Preciso entender de tecnologia para contratar?",
@@ -129,6 +192,24 @@ export default function Home() {
         serviceType: services.map((service) => service.title),
       },
       {
+        "@type": "ItemList",
+        "@id": `${siteUrl}#projetos`,
+        name: "Projetos selecionados de Catarina Magalhães",
+        numberOfItems: projects.length,
+        itemListElement: projects.map((project, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "SoftwareSourceCode",
+            name: project.title,
+            description: project.description,
+            ...(project.href ? { codeRepository: project.href } : {}),
+            programmingLanguage: project.technologies,
+            author: { "@id": `${siteUrl}#catarina` },
+          },
+        })),
+      },
+      {
         "@type": "FAQPage",
         mainEntity: faqs.map((item) => ({
           "@type": "Question",
@@ -170,6 +251,7 @@ export default function Home() {
         <nav aria-label="Navegação principal">
           <ul className="nav-list">
             <li><a href="#servicos">Como posso ajudar</a></li>
+            <li><a href="#projetos">Projetos</a></li>
             <li><a href="#processo">Como trabalho</a></li>
             <li><a href="#sobre">Sobre</a></li>
           </ul>
@@ -246,6 +328,65 @@ export default function Home() {
                   <span aria-hidden="true">→</span>
                   <strong>{service.deliverable}</strong>
                 </footer>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="section projects" id="projetos" aria-labelledby="projects-title">
+          <header className="section-heading projects-heading">
+            <div>
+              <p className="section-label">Projetos selecionados</p>
+              <h2 id="projects-title">Soluções que já saíram do papel.</h2>
+            </div>
+            <div className="projects-intro">
+              <p>
+                Conheça alguns trabalhos que demonstram como aplico análise,
+                desenvolvimento e usabilidade para resolver necessidades reais.
+              </p>
+              <a
+                className="projects-all-link"
+                href="https://github.com/CatarinaMaga?tab=repositories"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ver todos no GitHub <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </header>
+
+          <div className="project-grid">
+            {projects.map((project) => (
+              <article className="project-card" key={project.title}>
+                <header className="project-card-header">
+                  <span className="project-number" aria-hidden="true">{project.number}</span>
+                  <p>{project.category}</p>
+                </header>
+                <h3>{project.title}</h3>
+                <p className="project-description">{project.description}</p>
+                <p className="project-result">
+                  <span aria-hidden="true">→</span> {project.result}
+                </p>
+                <ul className="project-tags" aria-label={`Tecnologias utilizadas em ${project.title}`}>
+                  {project.technologies.map((technology) => (
+                    <li key={technology}>{technology}</li>
+                  ))}
+                </ul>
+                {project.href ? (
+                  <a
+                    className="project-link"
+                    href={project.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Ver o projeto ${project.title} no GitHub`}
+                  >
+                    Ver projeto <span aria-hidden="true">↗</span>
+                  </a>
+                ) : (
+                  <p className="project-link project-link-private">
+                    Projeto privado <span aria-hidden="true">●</span>
+                  </p>
+                )}
               </article>
             ))}
           </div>
