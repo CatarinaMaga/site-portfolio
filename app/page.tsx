@@ -70,7 +70,10 @@ const projects = [
       "Protótipo criado para transformar dados técnicos de motores em um diagnóstico visual de eficiência, desperdício e possibilidades de modernização.",
     result: "Tecnologia e sustentabilidade traduzidas em decisões mais claras",
     technologies: ["HTML5", "CSS3", "JavaScript"],
-    href: "https://github.com/CatarinaMaga/schneider-mvp",
+    repositoryHref: "https://github.com/CatarinaMaga/schneider-mvp",
+    repositoryLabel: "Ver código",
+    liveHref: "https://catarinamaga.github.io/schneider-mvp/",
+    liveLabel: "Abrir demonstração",
   },
   {
     number: "02",
@@ -80,7 +83,10 @@ const projects = [
       "Aplicação web para cadastrar produtos e suas embalagens, com validações, banco de dados e uma estrutura organizada para facilitar a manutenção.",
     result: "Informações centralizadas e operações do dia a dia mais seguras",
     technologies: ["ASP.NET Core", "Entity Framework", "SQLite"],
-    href: "https://github.com/CatarinaMaga/CadastroProdutos",
+    repositoryHref: "https://github.com/CatarinaMaga/CadastroProdutos",
+    repositoryLabel: "Ver código e instruções",
+    liveHref: null,
+    liveLabel: null,
   },
   {
     number: "03",
@@ -90,7 +96,10 @@ const projects = [
       "Sistema para organizar um acervo de livros, permitindo cadastrar, consultar, editar e excluir informações por meio de uma interface simples.",
     result: "Um processo manual transformado em uma experiência digital completa",
     technologies: ["Node.js", "Express", "MySQL"],
-    href: "https://github.com/CatarinaMaga/meu-primeiro-crud-biblioteca",
+    repositoryHref: "https://github.com/CatarinaMaga/meu-primeiro-crud-biblioteca",
+    repositoryLabel: "Ver código e instruções",
+    liveHref: null,
+    liveLabel: null,
   },
   {
     number: "04",
@@ -100,7 +109,10 @@ const projects = [
       "Ferramenta de produtividade para DJs que reúne o download e a organização de músicas em uma interface compacta, pensada para trabalhar junto ao Rekordbox.",
     result: "Um fluxo mais rápido para pesquisar, baixar e organizar novas faixas",
     technologies: ["Electron", "Node.js", "Express"],
-    href: "https://github.com/CatarinaMaga/dj-flow-desktop",
+    repositoryHref: "https://github.com/CatarinaMaga/dj-flow-desktop",
+    repositoryLabel: "Ver código e instalação",
+    liveHref: null,
+    liveLabel: null,
   },
   {
     number: "05",
@@ -110,7 +122,10 @@ const projects = [
       "Catálogo digital de produtos veterinários com filtros, carrinho, acesso de usuários, painel administrativo e um assistente conectado ao banco de produtos.",
     result: "Produtos, atendimento e gestão reunidos em uma única experiência",
     technologies: ["Next.js", "Supabase", "IA"],
-    href: "https://github.com/CatarinaMaga/Syntec-Vet-Eder",
+    repositoryHref: "https://github.com/CatarinaMaga/Syntec-Vet-Eder",
+    repositoryLabel: "Ver código",
+    liveHref: "https://syntecvet-catalogo.pages.dev/catalogo/",
+    liveLabel: "Abrir catálogo",
   },
   {
     number: "06",
@@ -120,7 +135,10 @@ const projects = [
       "Ecossistema para acompanhar a localização de pets em tempo real, consultar o histórico de trajetos e integrar aplicativo móvel, servidor e coleira com GPS.",
     result: "Software e hardware conectados para dar mais segurança aos tutores",
     technologies: ["React Native", "Node.js", "ESP32"],
-    href: null,
+    repositoryHref: null,
+    repositoryLabel: null,
+    liveHref: null,
+    liveLabel: null,
   },
 ];
 
@@ -203,7 +221,8 @@ export default function Home() {
             "@type": "SoftwareSourceCode",
             name: project.title,
             description: project.description,
-            ...(project.href ? { codeRepository: project.href } : {}),
+            ...(project.repositoryHref ? { codeRepository: project.repositoryHref } : {}),
+            ...(project.liveHref ? { url: project.liveHref } : {}),
             programmingLanguage: project.technologies,
             author: { "@id": `${siteUrl}#catarina` },
           },
@@ -372,21 +391,34 @@ export default function Home() {
                     <li key={technology}>{technology}</li>
                   ))}
                 </ul>
-                {project.href ? (
-                  <a
-                    className="project-link"
-                    href={project.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`Ver o projeto ${project.title} no GitHub`}
-                  >
-                    Ver projeto <span aria-hidden="true">↗</span>
-                  </a>
-                ) : (
-                  <p className="project-link project-link-private">
-                    Projeto privado <span aria-hidden="true">●</span>
-                  </p>
-                )}
+                <footer className="project-actions">
+                  {project.liveHref && project.liveLabel && (
+                    <a
+                      className="project-link project-link-live"
+                      href={project.liveHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${project.liveLabel}: ${project.title}`}
+                    >
+                      {project.liveLabel} <span aria-hidden="true">↗</span>
+                    </a>
+                  )}
+                  {project.repositoryHref && project.repositoryLabel ? (
+                    <a
+                      className="project-link project-link-repository"
+                      href={project.repositoryHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${project.repositoryLabel} de ${project.title} no GitHub`}
+                    >
+                      {project.repositoryLabel} <span aria-hidden="true">↗</span>
+                    </a>
+                  ) : (
+                    <p className="project-link project-link-private">
+                      Projeto privado <span aria-hidden="true">●</span>
+                    </p>
+                  )}
+                </footer>
               </article>
             ))}
           </div>
